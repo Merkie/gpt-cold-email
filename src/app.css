@@ -5,3 +5,8 @@
 .display {
 	font-family: FixelDisplay, sans-serif;
 }
+
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
