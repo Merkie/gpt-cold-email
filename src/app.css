@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.display {
+	font-family: FixelDisplay, sans-serif;
+}
