@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fade, fly } from 'svelte/transition';
+
 	export let close: () => void;
 
 	let email: string;
@@ -6,6 +8,7 @@
 </script>
 
 <button
+	transition:fade={{ duration: 100 }}
 	on:click={(e) => {
 		if (e.target === e.currentTarget) close();
 	}}
@@ -14,6 +17,7 @@
 </button>
 
 <div
+	transition:fly={{ y: 50, duration: 200 }}
 	class="z-30 bg-gray-50 shadow-md rounded-lg flex flex-col w-[90%] max-w-[400px] p-8 py-12 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 >
 	<div class="flex items-center justify-between mb-8">
