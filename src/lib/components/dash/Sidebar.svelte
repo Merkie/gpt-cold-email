@@ -6,7 +6,6 @@
 	const DataMenuItems = [
 		{ text: 'Contacts', href: 'contacts', icon: 'people' },
 		{ text: 'Businesses', href: 'businesses', icon: 'building' },
-		{ text: 'JSON Editor', href: 'json-editor', icon: 'braces' },
 	]
 
 	const EmailMenuItems = [
