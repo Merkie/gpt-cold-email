@@ -1,8 +1,10 @@
 <script>
 	import '../app.css';
+	import { Toaster } from 'svelte-sonner';
 </script>
 
 <slot />
+<Toaster />
 
 <style lang="postcss">
 	:global(html) {
