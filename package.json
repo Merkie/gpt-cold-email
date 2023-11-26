@@ -16,6 +16,7 @@
 		"@sveltejs/kit": "^1.27.4",
 		"@types/jsonwebtoken": "^9.0.5",
 		"@types/nodemailer": "^6.4.14",
+		"@types/semaphore": "^1.1.4",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
