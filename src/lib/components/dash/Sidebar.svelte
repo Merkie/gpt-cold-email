@@ -19,17 +19,17 @@
 
 <button
 	on:click={() => (isSidebarOpen = false)}
-	class={`fixed top-0 left-0 backdrop-blur-sm md:hidden ${
+	class={`fixed z-40 top-0 left-0 backdrop-blur-sm md:hidden ${
 		isSidebarOpen ? 'w-screen h-screen' : 'w-[0px] h-[0px]'
 	}`}>
 </button>
 
-<button on:click={() => (isSidebarOpen = true)} class="fixed top-5 left-4 text-2xl">
+<button on:click={() => (isSidebarOpen = true)} class="fixed z-40 top-5 left-4 text-2xl">
 	<i class="bi bi-list"></i>
 </button>
 
 <div
-	class={`fixed left-0 top-0 w-[250px] h-screen bg-gray-50 p-4 flex flex-col shadow-md md:-translate-x-[0%] transition-all ${
+	class={`fixed z-40 left-0 top-0 w-[250px] h-screen bg-gray-50 p-4 flex flex-col shadow-md md:-translate-x-[0%] transition-all ${
 		isSidebarOpen ? '-translate-x-[0%]' : '-translate-x-[100%]'
 	}`}>
 	<div class="flex gap-4 items-center font-bold mb-4">

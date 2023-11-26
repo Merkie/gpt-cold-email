@@ -1,6 +1,5 @@
 <div
-	style=""
-	class="fixed top-0 left-0 md:left-[250px] h-[70px] bg-gray-50 p-4 flex items-center gap-4 shadow-md w-full md:w-[calc(100vw-250px)] transition-all">
+	class="fixed z-40 top-0 left-0 md:left-[250px] h-[70px] bg-gray-50 p-4 flex items-center gap-4 shadow-md w-full md:w-[calc(100vw-250px)] transition-all">
 	<div
 		class="bg-gray-100 p-2 rounded-md flex focus-within:ring-2 items-center gap-4 flex-1 w-[20%] md:w-full ml-[50px] md:ml-[0px] transition-all">
 		<i class="bi bi-search text-sm pl-2"></i>
