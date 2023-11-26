@@ -9,7 +9,7 @@
 		<i class="bi bi-search text-sm pl-2"></i>
 		<input placeholder="Search..." class="bg-transparent flex-1 outline-none" type="text" />
 	</div>
-	<button class="flex gap-4 items-center pl-4">
+	<button class="flex gap-4 items-center px-4">
 		<div class="w-[35px] h-[35px] bg-gray-200 rounded-full relative">
 			<i
 				class="bi bi-person-fill absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-xl text-gray-400"
