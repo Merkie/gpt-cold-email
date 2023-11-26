@@ -40,6 +40,7 @@
 		"cryptr": "^6.3.0",
 		"jsonwebtoken": "^9.0.2",
 		"nodemailer": "^6.9.7",
+		"openai": "^4.20.0",
 		"prisma": "^5.6.0",
 		"svelte-sonner": "^0.3.4",
 		"zod": "^3.22.4"
