@@ -11,7 +11,9 @@
 </script>
 
 <div class="mb-8 flex items-center gap-8 border-b p-4 pb-8">
-	<p class="display text-xl">0 Email Templates</p>
+	<p class="display text-xl">
+		{data.templates.length} Email Template{data.templates.length === 1 ? '' : 's'}
+	</p>
 	<button
 		on:click={() => (createEmailTemplateModalOpen = true)}
 		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
@@ -38,7 +40,7 @@
 							deleteEmailTemplate = template;
 							deleteEmailTemplateModalOpen = true;
 						}}
-						class="hidden px-2 group-hover:block"
+						class="hidden px-2 text-gray-400 hover:text-gray-600 group-hover:block"
 					>
 						<i class="bi bi-trash"></i>
 					</button>
