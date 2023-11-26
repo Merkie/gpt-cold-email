@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
 	import ModalBase from './ModalBase.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	export let close: () => void;
 
@@ -29,6 +30,7 @@
 				descriptionClass: 'text',
 				description: `"${response.template.name}"`
 			});
+			await invalidateAll();
 		} else if (response.error) {
 			toast.error('Template Creation Error', {
 				class: 'display',
