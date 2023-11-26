@@ -1,3 +1,7 @@
+<script lang="ts">
+	const { name } = $props()
+</script>
+
 <div
 	class="fixed z-40 top-0 left-0 md:left-[250px] h-[70px] bg-gray-50 p-4 flex items-center gap-4 shadow-md w-full md:w-[calc(100vw-250px)] transition-all">
 	<div
@@ -11,7 +15,7 @@
 				class="bi bi-person-fill absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-xl text-gray-400"
 			></i>
 		</div>
-		<p class="whitespace-nowrap">Archer Calder</p>
+		<p class="whitespace-nowrap">{name}</p>
 		<div class="px-2">
 			<i class="bi bi-chevron-down"></i>
 		</div>

@@ -1,6 +1,8 @@
 <script>
 	import Sidebar from '$lib/components/dash/Sidebar.svelte'
 	import TopNav from '$lib/components/dash/TopNav.svelte'
+
+	const { data } = $props()
 </script>
 
 <div class="pt-[70px] md:pl-[250px] transition-all">
@@ -10,5 +12,5 @@
 		</div>
 	</div>
 </div>
-<TopNav />
+<TopNav name={data.name} />
 <Sidebar />
