@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@prisma/client": "^5.6.0",
 		"monaco-editor": "^0.44.0",
 		"monaco-themes": "^0.4.4",
 		"prisma": "^5.6.0"
