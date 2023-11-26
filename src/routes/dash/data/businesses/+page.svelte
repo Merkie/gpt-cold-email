@@ -3,24 +3,24 @@
 	const businesses = data.businesses;
 </script>
 
-<div class="bg-gray-50 rounded-md shadow-md">
-	<p class="display font-bold text-xl p-4 border-b">Businesses</p>
+<div class="rounded-md bg-gray-50 shadow-md">
+	<p class="display border-b p-4 text-xl font-bold">Businesses</p>
 	<div class="p-4">
-		<table class="border w-full">
+		<table class="w-full border">
 			<thead class="bg-gray-50">
 				<tr>
-					<th class="text-left p-2 border display">Business Name</th>
-					<th class="text-left p-2 border display">Address</th>
-					<th class="text-center p-2 border display">Contacts</th>
-					<th class="text-center p-2 border display">Status</th>
+					<th class="display border p-2 text-left">Business Name</th>
+					<th class="display border p-2 text-left">Address</th>
+					<th class="display border p-2 text-center">Contacts</th>
+					<th class="display border p-2 text-center">Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				{#each businesses as business, i}
 					<tr class={i % 2 !== 0 ? '' : 'bg-gray-100'}>
-						<td class="p-2 border">{business.title}</td>
-						<td class="p-2 border">{business.address}</td>
-						<td class="p-2 border">
+						<td class="border p-2">{business.title}</td>
+						<td class="border p-2">{business.address}</td>
+						<td class="border p-2">
 							{#if business.employeeCount > 0}
 								<p class="text-center">
 									<i class="bi bi-check-lg text-emerald-500"></i>
@@ -31,9 +31,9 @@
 								</p>
 							{/if}
 						</td>
-						<td class="p-2 border">
+						<td class="border p-2">
 							<p
-								class={`p-1 px-3 mx-auto text-xs rounded-md text-gray-50 font-bold w-fit bg-yellow-400`}
+								class={`mx-auto w-fit rounded-md bg-yellow-400 p-1 px-3 text-xs font-bold text-gray-50`}
 							>
 								No Draft
 							</p>

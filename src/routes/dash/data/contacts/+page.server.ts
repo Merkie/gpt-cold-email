@@ -2,19 +2,19 @@ export const load = async ({ locals: { user, prisma } }) => {
 	const employees = await prisma.employees.findMany({
 		where: {
 			user: {
-				id: user.id,
-			},
+				id: user.id
+			}
 		},
 		include: {
 			business: {
 				select: {
-					title: true,
-				},
-			},
-		},
-	})
+					title: true
+				}
+			}
+		}
+	});
 
 	return {
-		contacts: employees,
-	}
-}
+		contacts: employees
+	};
+};

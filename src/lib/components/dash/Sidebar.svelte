@@ -20,25 +20,25 @@
 
 <button
 	on:click={() => (isSidebarOpen = false)}
-	class={`fixed z-20 top-0 left-0 backdrop-blur-sm md:hidden ${
-		isSidebarOpen ? 'w-screen h-screen' : 'w-[0px] h-[0px]'
+	class={`fixed left-0 top-0 z-20 backdrop-blur-sm md:hidden ${
+		isSidebarOpen ? 'h-screen w-screen' : 'h-[0px] w-[0px]'
 	}`}
 >
 </button>
 
-<button on:click={() => (isSidebarOpen = true)} class="fixed z-20 top-5 left-4 text-2xl">
+<button on:click={() => (isSidebarOpen = true)} class="fixed left-4 top-5 z-20 text-2xl">
 	<i class="bi bi-list"></i>
 </button>
 
 <div
-	class={`fixed z-20 left-0 top-0 w-[250px] h-screen bg-gray-50 p-4 flex flex-col shadow-md md:-translate-x-[0%] transition-all ${
+	class={`fixed left-0 top-0 z-20 flex h-screen w-[250px] flex-col bg-gray-50 p-4 shadow-md transition-all md:-translate-x-[0%] ${
 		isSidebarOpen ? '-translate-x-[0%]' : '-translate-x-[100%]'
 	}`}
 >
-	<div class="flex gap-4 items-center font-bold mb-4">
-		<div class="w-[40px] h-[40px] bg-gray-800 rounded-md rounded-br-none relative">
+	<div class="mb-4 flex items-center gap-4 font-bold">
+		<div class="relative h-[40px] w-[40px] rounded-md rounded-br-none bg-gray-800">
 			<i
-				class="bi bi-envelope-check absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-xl text-gray-50"
+				class="bi bi-envelope-check absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl text-gray-50"
 			></i>
 		</div>
 		<p class="display text-xl">GPT Cold Email</p>
@@ -67,12 +67,12 @@
 
 <style>
 	.category {
-		@apply mt-4 mb-2 text-sm font-semibold;
+		@apply mb-2 mt-4 text-sm font-semibold;
 		font-family: FixelDisplay, FixelText, 'Inter', sans-serif;
 	}
 
 	.item {
-		@apply p-3 rounded-md flex items-center gap-4;
+		@apply flex items-center gap-4 rounded-md p-3;
 	}
 
 	.selected {
