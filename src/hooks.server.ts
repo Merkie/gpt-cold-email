@@ -2,9 +2,11 @@ import prisma from '$lib/resources/prisma';
 import { redirect, type Handle } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '$env/static/private';
+import openai from '$lib/resources/openai';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.prisma = prisma;
+	event.locals.openai = openai;
 
 	// Token decoding and user fetching
 	const token = event.cookies.get('gptce-token');

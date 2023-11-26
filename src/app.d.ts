@@ -1,6 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 
 import type { PrismaClient, users } from '@prisma/client';
+import type openai from 'openai';
 
 // for information about these interfaces
 declare global {
@@ -9,6 +10,7 @@ declare global {
 		interface Locals {
 			prisma: PrismaClient;
 			user: users;
+			openai: openai;
 		}
 		// interface PageData {}
 		// interface Platform {}
