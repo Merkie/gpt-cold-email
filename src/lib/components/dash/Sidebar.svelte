@@ -13,8 +13,8 @@
 		{ text: 'Email Templates', href: 'email-templates', icon: 'pencil-square' },
 		{ text: 'Email Playground', href: 'email-playground', icon: 'rocket-takeoff' },
 		{ text: 'Generate Emails', href: 'generate-emails', icon: 'envelope-plus' },
-		{ text: 'Send Emails', href: 'send-emails', icon: 'send' },
-		{ text: 'Schedule Emails', href: 'schedule-emails', icon: 'calendar-week' }
+		{ text: 'Send Emails', href: 'send-emails', icon: 'send' }
+		// { text: 'Schedule Emails', href: 'schedule-emails', icon: 'calendar-week' }
 	];
 </script>
 
