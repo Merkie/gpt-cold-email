@@ -26,6 +26,15 @@
 		monaco?.editor.getModels().forEach((model) => model.dispose())
 		editor?.dispose()
 	})
+
+	async function handleUpload() {
+		const response = await fetch('/api/v1/data/upload', {
+			method: 'POST',
+			body: JSON.stringify({
+				data: editor.getValue(),
+			}),
+		})
+	}
 </script>
 
 <div class="px-4 bg-[#2e3440] rounded-md">
@@ -35,7 +44,8 @@
 <div class="mt-4 flex items-center gap-4">
 	<button disabled={true} class="bg-gray-800 text-gray-50 p-3 px-16 rounded-md"
 		>Save Changes</button>
-	<button class="bg-gray-800 text-gray-50 p-3 px-16 rounded-md">Download JSON</button>
+	<!-- <button on:click={handleUpload} class="bg-gray-800 text-gray-50 p-3 px-16 rounded-md"
+		>Upload</button> -->
 </div>
 
 <style>
