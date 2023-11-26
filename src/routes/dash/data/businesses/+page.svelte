@@ -17,7 +17,7 @@
 			</thead>
 			<tbody>
 				{#each businesses as business, i}
-					<tr class={i % 2 === 0 ? '' : 'bg-gray-50'}>
+					<tr class={i % 2 !== 0 ? '' : 'bg-gray-100'}>
 						<td class="p-2 border">{business.title}</td>
 						<td class="p-2 border">{business.address}</td>
 						<td class="p-2 border">
