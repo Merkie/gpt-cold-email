@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum business_staus {
+  NO_DRAFTS
+  DRAFTS
+  SENT
+}
+
+model users {
+  id               Int                @id @default(autoincrement())
+  email            String             @unique
+  name             String
+  password         String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  businesses       businesses[]
+  employees        employees[]
+  email_account    email_accounts[]
+  email_templates  email_templates[]
+  generated_emails generated_emails[]
+}
+
+model businesses {
+  id         Int            @id @default(autoincrement())
+  user       users          @relation(fields: [user_id], references: [id])
+  user_id    Int
+  title      String
+  link       String
+  address    String
+  phone      String
+  map_id     String
+  raw        String
+  status     business_staus @default(NO_DRAFTS)
+  created_at DateTime       @default(now())
+  updated_at DateTime       @updatedAt
+  employees  employees[]
+}
+
+model employees {
+  id               Int                @id @default(autoincrement())
+  user             users              @relation(fields: [user_id], references: [id])
+  user_id          Int
+  business         businesses         @relation(fields: [business_id], references: [id])
+  business_id      Int
+  name             String
+  roles            String[]
+  emails           String[]
+  linkedin_url     String
+  raw              String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  generated_emails generated_emails[]
+}
+
+model email_accounts {
+  id         Int      @id @default(autoincrement())
+  user       users    @relation(fields: [user_id], references: [id])
+  user_id    Int
+  email      String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model email_templates {
+  id               Int                @id @default(autoincrement())
+  user             users              @relation(fields: [user_id], references: [id])
+  user_id          Int
+  name             String
+  subject          String
+  body             String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  generated_emails generated_emails[]
+}
+
+model generated_emails {
+  id          Int             @id @default(autoincrement())
+  user        users           @relation(fields: [user_id], references: [id])
+  user_id     Int
+  template    email_templates @relation(fields: [template_id], references: [id])
+  template_id Int
+  employee    employees       @relation(fields: [employee_id], references: [id])
+  employee_id Int
+  sent        Boolean         @default(false)
+  sent_at     DateTime?
+  recipient   String?
+  sender      String?
+  subject     String
+  body        String
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+}
