@@ -5,7 +5,8 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 	const schema = z.object({
 		template_id: z.number(),
 		employee_id: z.number(),
-		save: z.boolean().optional()
+		save: z.boolean().optional(),
+		email: z.string().email().optional()
 	});
 	const body = (await request.json()) as z.infer<typeof schema>;
 
@@ -103,7 +104,8 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 				template_id: template.id,
 				employee_id: employee.id,
 				subject: emailSubject,
-				body: emailBody
+				body: emailBody,
+				recipient: body.email || undefined
 			}
 		});
 	}
