@@ -8,14 +8,15 @@ datasource db {
 }
 
 model users {
-  id         Int          @id @default(autoincrement())
-  email      String       @unique
-  name       String
-  password   String
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
-  businesses businesses[]
-  employees  employees[]
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  name          String
+  password      String
+  created_at    DateTime        @default(now())
+  updated_at    DateTime        @updatedAt
+  businesses    businesses[]
+  employees     employees[]
+  email_account email_account[]
 }
 
 model businesses {
@@ -46,4 +47,43 @@ model employees {
   raw          String
   created_at   DateTime   @default(now())
   updated_at   DateTime   @updatedAt
+}
+
+model email_accounts {
+  id         Int      @id @default(autoincrement())
+  user       users    @relation(fields: [user_id], references: [id])
+  user_id    Int
+  email      String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model email_templates {
+  id         Int      @id @default(autoincrement())
+  user       users    @relation(fields: [user_id], references: [id])
+  user_id    Int
+  name       String
+  subject    String
+  body       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model generated_emails {
+  id          Int             @id @default(autoincrement())
+  user        users           @relation(fields: [user_id], references: [id])
+  user_id     Int
+  template    email_templates @relation(fields: [template_id], references: [id])
+  template_id Int
+  employee    employees       @relation(fields: [employee_id], references: [id])
+  employee_id Int
+  sent        Boolean         @default(false)
+  sent_at     DateTime?
+  recipient   String?
+  sender      String?
+  subject     String
+  body        String
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
 }
