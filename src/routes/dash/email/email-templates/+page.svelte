@@ -1,1 +1,0 @@
-<p>Email templates</p>
