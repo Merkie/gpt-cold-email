@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NewEmailAccountModal from '$lib/components/dash/modals/NewEmailAccountModal.svelte';
 	import DeleteEmailAccountModal from '$lib/components/dash/modals/DeleteEmailAccountModal.svelte';
+	import SendTestEmailModal from '$lib/components/dash/modals/SendTestEmailModal.svelte';
 	import type { email_accounts } from '@prisma/client';
 
 	export let data;
@@ -8,6 +9,8 @@
 	let newEmailAccountModalOpen = false;
 	let deleteEmailAccountModalOpen = false;
 	let deleteEmailAccount: email_accounts | null = null;
+	let sendTestEmailModalOpen = false;
+	let sendTestEmailAccount: email_accounts | null = null;
 </script>
 
 <div class="mb-8 flex items-center gap-8 border-b p-4 pb-8">
@@ -27,7 +30,7 @@
 		<p class="italic text-gray-300">Nothing here (yet!)</p>
 	</div>
 {:else}
-	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+	<div class="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
 		{#each data.accounts as account}
 			<div class="group rounded-md border border-gray-200 bg-white p-4">
 				<div class="flex items-center gap-4">
@@ -39,10 +42,19 @@
 					</button> -->
 					<button
 						on:click={() => {
+							sendTestEmailAccount = account;
+							sendTestEmailModalOpen = true;
+						}}
+						class="hidden px-2 text-gray-400 hover:text-gray-600 group-hover:block"
+					>
+						<i class="bi bi-send"></i>
+					</button>
+					<button
+						on:click={() => {
 							deleteEmailAccount = account;
 							deleteEmailAccountModalOpen = true;
 						}}
-						class="hidden px-2 text-gray-400 hover:text-gray-600 group-hover:block"
+						class="hidden text-gray-400 hover:text-gray-600 group-hover:block"
 					>
 						<i class="bi bi-trash"></i>
 					</button>
@@ -63,5 +75,15 @@
 			deleteEmailAccount = null;
 		}}
 		account={deleteEmailAccount}
+	/>
+{/if}
+
+{#if sendTestEmailModalOpen && sendTestEmailAccount}
+	<SendTestEmailModal
+		close={() => {
+			sendTestEmailModalOpen = false;
+			sendTestEmailAccount = null;
+		}}
+		sender_id={sendTestEmailAccount.id}
 	/>
 {/if}
