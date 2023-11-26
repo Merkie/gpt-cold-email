@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
+
 	export let data;
 
 	let selectedTemplateIndex = 0;
@@ -6,6 +8,9 @@
 	let selectedEmployeeIndex = 0;
 
 	let loading = false;
+
+	let generatedSubject = '';
+	let generatedBody = '';
 
 	async function functionHandleGenerate() {
 		if (loading) return;
@@ -16,8 +21,21 @@
 				template_id: data.templates[selectedTemplateIndex].id,
 				employee_id: data.businesses[selectedBusinessIndex].employees[selectedEmployeeIndex].id
 			})
-		});
+		}).then((res) => res.json());
+
 		loading = false;
+
+		if (response.error) {
+			toast.error('Email Generation Error', {
+				class: 'display',
+				descriptionClass: 'text',
+				description: response.error
+			});
+			return;
+		}
+
+		generatedSubject = response.subject;
+		generatedBody = response.body;
 	}
 </script>
 
@@ -31,12 +49,14 @@
 			<span>Generation Result</span>
 		</p>
 		<input
+			bind:value={generatedSubject}
 			placeholder={data.templates[selectedTemplateIndex].subject || ''}
 			disabled
 			class="mb-4 w-full rounded-md border border-gray-200 bg-white p-2 px-4"
 			type="text"
 		/>
 		<textarea
+			bind:value={generatedBody}
 			placeholder={data.templates[selectedTemplateIndex].body || ''}
 			disabled
 			class="mb-4 flex h-full w-full resize-y flex-col gap-4 rounded-md border border-gray-200 bg-white p-2 px-4"
