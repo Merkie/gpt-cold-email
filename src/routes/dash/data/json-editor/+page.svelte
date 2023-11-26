@@ -10,7 +10,7 @@
 
 	onMount(async () => {
 		// Init Monaco (we gotta do it like this)
-		monaco = (await import('$lib/monaco')).default
+		monaco = (await import('$lib/resources/monaco')).default
 		editor = monaco.editor.create(editorContainer)
 
 		// Set the initial value of the editor
