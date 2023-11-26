@@ -1,4 +1,5 @@
 <script>
+	import CreateEmailTemplateModal from '$lib/components/dash/modals/CreateEmailTemplateModal.svelte';
 	let createEmailTemplateModalOpen = false;
 </script>
 
@@ -16,6 +17,6 @@
 	<p class="italic text-gray-300">Nothing here (yet!)</p>
 </div>
 
-<!-- {#if createEmailTemplateModalOpen}
-	<NewCreateEmailTemplateModal close={() => (createEmailTemplateModalOpen = false)} />
-{/if} -->
+{#if createEmailTemplateModalOpen}
+	<CreateEmailTemplateModal close={() => (createEmailTemplateModalOpen = false)} />
+{/if}
