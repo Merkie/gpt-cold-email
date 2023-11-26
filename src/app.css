@@ -6,6 +6,10 @@
 	font-family: FixelDisplay, sans-serif;
 }
 
+.text {
+	font-family: FixelText, sans-serif;
+}
+
 button:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
