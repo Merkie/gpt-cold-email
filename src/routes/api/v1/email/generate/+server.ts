@@ -57,7 +57,7 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 				},
 				{
 					role: 'user',
-					content: `Perfect, go ahead and get back to me when you have something. I would love to see what other creative twists you can come up with! Please try and change up what you can like emojis and phrasing but stick to the same tone, style, and format as before. Also, I'll need you to submit it in JSON format with the schema \`\`\`json{ subject: "", body: ""}\`\`\`, really important you keep those same key names \`subject\` and \`body\` when you submit your response. Cheers!`
+					content: `Perfect, go ahead and get back to me when you have something. I would love to see what other creative twists you can come up with! Please try and change up what you can like emojis and phrasing but stick to the same tone, style, and format as before. Please don't over-praise the decision-maker, so avoid words like "esteemed" or "luxury" when describing the business or employee, this could come off as back-handed to some. Please keep the emails short and sweet so try not to be too wordy. we really want to come across as down-to-earth and just a flat out good investment. Also, I'll need you to submit it in JSON format with the schema \`\`\`json{ subject: "", body: ""}\`\`\`, really important you keep those same key names \`subject\` and \`body\` when you submit your response. Cheers!`
 				}
 			],
 			response_format: {
@@ -110,5 +110,5 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 		});
 	}
 
-	return json({ body: emailBody, subject: emailSubject });
+	return json({ body: emailBody.replaceAll('**', ''), subject: emailSubject });
 };
