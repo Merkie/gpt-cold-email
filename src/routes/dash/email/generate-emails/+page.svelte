@@ -2,7 +2,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import type { businesses } from '@prisma/client';
 	import { toast } from 'svelte-sonner';
-	import semaphore from 'semaphore';
+	import pLimit from 'p-limit';
 
 	export let data;
 
@@ -59,13 +59,13 @@
 		if (loading) return;
 		loading = true;
 
-		const sem = semaphore(5);
-		for (const business of data.businessesWithoutGeneratedEmails.slice(0, 5)) {
-			sem.take(async () => {
-				await generateEmailFromBusiness(business);
-				sem.leave();
-			});
-		}
+		const limit = pLimit(5);
+
+		await Promise.all(
+			data.businessesWithoutGeneratedEmails.map((business) =>
+				limit(() => generateEmailFromBusiness(business))
+			)
+		);
 
 		loading = false;
 	}
@@ -74,12 +74,14 @@
 <div class="mb-8 flex items-center gap-8 border-b p-4 pb-8">
 	<p class="display text-xl">Generate Emails</p>
 	<button
-		disabled={loading}
+		disabled={loading || data.businessesWithoutGeneratedEmails.length === 0}
 		on:click={handleGenerateEmails}
 		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
 		>{loading
 			? 'Generating Emails...'
-			: `Generate Emails (${data.businessesWithoutGeneratedEmails.length})`}</button
+			: data.businessesWithoutGeneratedEmails.length > 0
+			  ? `Generate Emails (${data.businessesWithoutGeneratedEmails.length})`
+			  : `All Emails Generated`}</button
 	>
 	<p>Email Template:</p>
 	<select
