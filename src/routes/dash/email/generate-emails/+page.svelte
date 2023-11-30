@@ -22,7 +22,7 @@
 			toast.error('Email Generation Error', {
 				class: 'display',
 				descriptionClass: 'text',
-				description: `Couldn't find an employee to send the email to for ${business.title}. Error: ${determinationResponse.error}`
+				description: `Couldn't find an employee to send the email to for ${business.name}. Error: ${determinationResponse.error}`
 			});
 			return;
 		}
@@ -41,7 +41,7 @@
 			toast.error('Email Generation Error', {
 				class: 'display',
 				descriptionClass: 'text',
-				description: `Couldn't generate email for ${business.title}. Error: ${emailGenResponse.error}`
+				description: `Couldn't generate email for ${business.name}. Error: ${emailGenResponse.error}`
 			});
 			return;
 		}
@@ -49,7 +49,7 @@
 		toast.success('Email Generated', {
 			class: 'display',
 			descriptionClass: 'text',
-			description: `Successfully generated email for ${business.title}.`
+			description: `Successfully generated email for ${business.name}.`
 		});
 
 		await invalidateAll();

@@ -21,7 +21,7 @@
 						<td class="border p-2">{contact.name}</td>
 						<td class="border p-2">{contact.roles.join(', ')}</td>
 						<td class="border p-2">
-							{contact.business.title}
+							{contact.business.name}
 						</td>
 					</tr>
 				{/each}

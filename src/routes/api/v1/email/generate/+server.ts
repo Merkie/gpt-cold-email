@@ -44,7 +44,7 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 					content: `Thanks this is perfect! Can you write me an email just like that but for ${
 						employee.name
 					}? They work at the ${
-						employee.business.title
+						employee.business.name
 					}. Here I'll send you some data about the employee and the business, it'll be in JSON because that's all I have as of now. ${'```json'}\n${JSON.stringify(
 						employee,
 						null,

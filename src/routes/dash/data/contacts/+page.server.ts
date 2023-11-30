@@ -8,7 +8,7 @@ export const load = async ({ locals: { user, prisma } }) => {
 		include: {
 			business: {
 				select: {
-					title: true
+					name: true
 				}
 			}
 		}

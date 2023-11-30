@@ -18,7 +18,7 @@
 			<tbody>
 				{#each businesses as business, i}
 					<tr class={i % 2 !== 0 ? '' : 'bg-gray-100'}>
-						<td class="border p-2">{business.title}</td>
+						<td class="border p-2">{business.name}</td>
 						<td class="border p-2">{business.address}</td>
 						<td class="border p-2">
 							{#if business.employeeCount > 0}

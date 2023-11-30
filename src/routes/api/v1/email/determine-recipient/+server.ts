@@ -22,8 +22,6 @@ export const POST = async ({ request, locals: { user, prisma, openai } }) => {
 
 	if (!business) return json({ error: 'Invalid business ID' }, { status: 400 });
 
-	business.raw = '';
-
 	let employee_id = -1;
 	let employee_email = '';
 
