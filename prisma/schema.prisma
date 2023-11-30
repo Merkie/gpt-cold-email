@@ -7,12 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum business_staus {
-  NO_DRAFTS
-  DRAFTS
-  SENT
-}
-
 model users {
   id               Int                @id @default(autoincrement())
   email            String             @unique
@@ -28,19 +22,19 @@ model users {
 }
 
 model businesses {
-  id         Int            @id @default(autoincrement())
-  user       users          @relation(fields: [user_id], references: [id])
-  user_id    Int
-  title      String
-  link       String
-  address    String
-  phone      String
-  map_id     String
-  raw        String
-  status     business_staus @default(NO_DRAFTS)
-  created_at DateTime       @default(now())
-  updated_at DateTime       @updatedAt
-  employees  employees[]
+  id          Int         @id @default(autoincrement())
+  user        users       @relation(fields: [user_id], references: [id])
+  user_id     Int
+  name        String
+  address     String
+  description String
+  links       String[]
+  emails      String[]
+  phones      String[]
+  metadata    Json?
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  employees   employees[]
 }
 
 model employees {
@@ -52,8 +46,8 @@ model employees {
   name             String
   roles            String[]
   emails           String[]
-  linkedin_url     String
-  raw              String
+  links            String[]
+  metadata         Json?
   created_at       DateTime           @default(now())
   updated_at       DateTime           @updatedAt
   generated_emails generated_emails[]
