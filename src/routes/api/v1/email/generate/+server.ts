@@ -32,65 +32,53 @@ export const POST = async ({ request, locals: { prisma, user, openai } }) => {
 			messages: [
 				{
 					role: 'user',
-					content:
-						'Hey, can you send me the new email you wrote, I just heard for corporate that its performing really well.'
-				},
-				{
-					role: 'assistant',
-					content: `Sure, here it is:\n\n\nSubject: ${template.subject}\n\nBody: ${template.body}`
-				},
-				{
-					role: 'user',
-					content: `Thanks this is perfect! Can you write me an email just like that but for ${
-						employee.name
-					}? They work at the ${
-						employee.business.name
-					}. Here I'll send you some data about the employee and the business, it'll be in JSON because that's all I have as of now. ${'```json'}\n${JSON.stringify(
-						employee,
-						null,
-						2
-					)}\n${'```'}`
-				},
-				{
-					role: 'assistant',
-					content: `For sure! I can write something just like this, keeping the same tone and style, but I will change it up and really tailor it to the employee and business so it's ultra-targeted. I'll also try and include the employee's first name in the email subject so it catches their eye! Alright give me a few minutes and I'll get back to you, I got something good in the works! I'll keep my same contact info as well.`
-				},
-				{
-					role: 'user',
-					content: `Perfect, go ahead and get back to me when you have something. I would love to see what other creative twists you can come up with! Please try and change up what you can like emojis and phrasing but stick to the same tone, style, and format as before. Please don't over-praise the decision-maker, so avoid words like "esteemed" or "luxury" when describing the business or employee, this could come off as back-handed to some. Please keep the emails short and sweet so try not to be too wordy. we really want to come across as down-to-earth and just a flat out good investment. Also, I'll need you to submit it in JSON format with the schema \`\`\`json{ subject: "", body: ""}\`\`\`, really important you keep those same key names \`subject\` and \`body\` when you submit your response. Cheers!`
+					content: `
+						Hey Chad Calder, your job today will be to write a mock email to a fake client. You will be judged on how closely you follow the style
+						and tone of the example while also coming up with a creative twist and making it your own. That being said, it is not ok
+						to copy from the example email directly, meaning you will have to come up with new phrasing/emojis/etc.
+					
+						Please examine this example email:
+						\`\`\`
+						Subject: ${template.subject}
+						Body:
+						${template.body}
+						\`\`\`
+
+						Please examine the target client you will write your mock email to:
+						\`\`\`
+						Name: ${employee.name}
+						Title(s): ${employee.roles.join(', ')}
+						Business: ${employee.business.name}
+						Business Description: ${employee.business.summary || 'No summary provided.'}
+						\`\`\`
+						
+						Once you have completed this writing task, please submit your mock email back to me in this chat.
+
+						It is critical that your format your email exactly like how I did mine. Including the signature at the bottom, your mock email should have the same contact signature.
+					`
+						.split('\n')
+						.map((l) => l.trim())
+						.join('\n')
 				}
 			],
-			response_format: {
-				type: 'json_object'
-			}
+			temperature: 1.3
 		});
 
-		// pull json from response
-		let responseJson: {
-			body: string;
-			subject: string;
-		};
-		try {
-			responseJson = JSON.parse(gptResponse.choices[0].message.content || '{}');
-		} catch {
-			continue;
-		}
+		if (!gptResponse.choices[0].message.content) continue;
 
-		// validate json with zod
-		if (
-			!z
-				.object({
-					body: z.string(),
-					subject: z.string()
-				})
-				.safeParse(responseJson).success
-		)
-			continue;
+		console.log(gptResponse.choices[0].message.content);
+
+		const subject = gptResponse.choices[0].message.content
+			.split('Subject:')[1]
+			.split('\n')[0]
+			.trim();
+		const body = gptResponse.choices[0].message.content.split('Body:')[1].trim();
+		if (!subject || !body) continue;
 
 		// this code only runs if the json is valid
 		// set email subject and body, break the loop
-		emailSubject = responseJson.subject;
-		emailBody = responseJson.body;
+		emailSubject = subject;
+		emailBody = body;
 		break;
 	}
 
