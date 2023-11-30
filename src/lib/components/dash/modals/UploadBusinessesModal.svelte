@@ -13,7 +13,6 @@
 		let taJson = undefined;
 		try {
 			taJson = JSON.parse(textareaValue.trim());
-			console.log(textareaValue.trim());
 		} catch (e) {
 			toast.error('Invalid JSON', {
 				class: 'display',
@@ -40,13 +39,13 @@
 		loading = false;
 
 		if (response.success) {
-			toast.success('Email Sent Successfully', {
+			toast.success('Successfully uploaded businesses', {
 				class: 'display',
 				descriptionClass: 'text',
-				description: `Check your inbox at ${$RecipientEmailForTestSends} to confirm it landed!`
+				description: 'Successfully uploaded businesses.'
 			});
 		} else if (response.error) {
-			toast.error('Email Account Deletion Error', {
+			toast.error('Error uploading businesses', {
 				class: 'display',
 				descriptionClass: 'text',
 				description: response.error
