@@ -1,7 +1,21 @@
 <script lang="ts">
+	import UploadBusinessesModal from '$lib/components/dash/modals/UploadBusinessesModal.svelte';
+
 	export let data;
 	const businesses = data.businesses;
+
+	let uploadBusinessesJsonModalOpen = false;
 </script>
+
+<div class="mb-8 flex items-center gap-8 border-b p-4 pb-8">
+	<p class="display text-xl">
+		{businesses.length} Businesses
+	</p>
+	<button
+		on:click={() => (uploadBusinessesJsonModalOpen = true)}
+		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50">Upload Business JSON</button
+	>
+</div>
 
 <div class="rounded-md bg-gray-50 shadow-md">
 	<p class="display border-b p-4 text-xl font-bold">Businesses</p>
@@ -44,3 +58,7 @@
 		</table>
 	</div>
 </div>
+
+{#if uploadBusinessesJsonModalOpen}
+	<UploadBusinessesModal close={() => (uploadBusinessesJsonModalOpen = false)} />
+{/if}
