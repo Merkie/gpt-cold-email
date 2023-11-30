@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = async () => {
-	throw redirect(307, '/dash/data/contacts');
+	throw redirect(307, '/dash/data/businesses');
 };

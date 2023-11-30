@@ -16,7 +16,7 @@
 			})
 		}).then((res) => res.json());
 
-		if (response.token) await goto('/dash/data/contacts');
+		if (response.token) await goto('/dash/data/businesses');
 	}
 </script>
 
