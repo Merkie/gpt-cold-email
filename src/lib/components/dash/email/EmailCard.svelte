@@ -13,7 +13,7 @@
 
 <button
 	on:click={onClick}
-	class="group flex h-[200px] flex-col overflow-hidden rounded-md border border-gray-200 bg-white p-4 text-left"
+	class="group flex flex-col overflow-hidden rounded-md border border-gray-200 bg-white p-4 text-left"
 >
 	<p class="overflow-hidden overflow-ellipsis pr-4 text-lg font-semibold">
 		{email.subject}
@@ -21,5 +21,8 @@
 	<p class="whitespace-nowrap text-sm text-gray-400">
 		To: {email.employee.name}
 	</p>
-	<p class="mt-4 flex-1 text-sm text-gray-400">{email.body.slice(0, 300) + '...'}</p>
+	<div class="flex-1"></div>
+	<div class="relative mt-4 whitespace-pre-wrap rounded-sm bg-gray-100 p-2">
+		<p>{email.body.slice(0, 100) + '...'}</p>
+	</div>
 </button>
