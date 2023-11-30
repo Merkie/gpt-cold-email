@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { invalidateAll } from '$app/navigation';
-	import type { businesses } from '@prisma/client';
+	import type { businesses, employees, generated_emails } from '@prisma/client';
 	import { toast } from 'svelte-sonner';
 	import pLimit from 'p-limit';
+	import ViewEmailModal from '$lib/components/dash/modals/ViewEmailModal.svelte';
 
 	export let data;
 
 	let selectedTemplateIndex = 0;
 
 	let loading = false;
+
+	let viewingEmailModalOpen = false;
+	let viewingEmail: (generated_emails & { employee: employees }) | undefined = undefined;
 
 	async function generateEmailFromBusiness(business: businesses) {
 		const determinationResponse = await fetch('/api/v1/email/determine-recipient', {
@@ -62,9 +66,8 @@
 		const limit = pLimit(5);
 
 		await Promise.all(
-			data.businessesWithoutGeneratedEmails.map((business) =>
-				limit(() => generateEmailFromBusiness(business))
-			)
+			data.businessesWithoutGeneratedEmails
+				.map((business) => limit(() => generateEmailFromBusiness(business)))
 		);
 
 		loading = false;
@@ -104,6 +107,11 @@
 	<div class="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
 		{#each data.emails as email}
 			<button
+				on:click={() => {
+					viewingEmailModalOpen = true;
+					// @ts-ignore
+					viewingEmail = email;
+				}}
 				class="group flex h-[200px] flex-col overflow-hidden rounded-md border border-gray-200 bg-white p-4 text-left"
 			>
 				<div class="flex items-center justify-between">
@@ -118,4 +126,14 @@
 			</button>
 		{/each}
 	</div>
+{/if}
+
+{#if viewingEmailModalOpen && viewingEmail}
+	<ViewEmailModal
+		close={() => {
+			viewingEmailModalOpen = false;
+			viewingEmail = undefined;
+		}}
+		email={viewingEmail}
+	/>
 {/if}
