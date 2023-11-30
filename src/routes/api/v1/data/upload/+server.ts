@@ -1,73 +1,36 @@
 import { json } from '@sveltejs/kit';
+import { z } from 'zod';
 
-export const POST = async ({ request, locals: { prisma, user } }) => {
-	const body = await request.json();
-	const data = JSON.parse(body.data);
+// , locals: { prisma, user }
 
-	const uniquePromises = await Promise.all(
-		data.map((pair: { business: { map_id: string } }) => {
-			if (!pair.business.map_id) return;
-
-			return prisma.businesses.findFirst({
-				where: {
-					user: {
-						id: user.id
-					},
-					map_id: pair.business.map_id
-				}
-			});
+export const POST = async ({ request }) => {
+	const schema = z.array(
+		z.object({
+			name: z.string(),
+			address: z.string(),
+			links: z.array(z.string()),
+			emails: z.array(z.string()),
+			phones: z.array(z.string()),
+			metadata: z.any(),
+			employees: z.array(
+				z.object({
+					name: z.string(),
+					roles: z.array(z.string()),
+					links: z.array(z.string()),
+					phones: z.array(z.string())
+				})
+			),
+			emailFormats: z.object({
+				mostLikely: z.string(),
+				emailFormats: z.array(z.string())
+			})
 		})
 	);
+	const body = (await request.json()) as z.infer<typeof schema>;
 
-	const uniquePairs = data.filter((pair: { business: { map_id: string } }, index: number) => {
-		return !uniquePromises[index];
-	});
+	if (!schema.safeParse(body).success) return json({ error: 'Invalid body' }, { status: 400 });
 
-	const businesses = await prisma.businesses.createMany({
-		data: uniquePairs.map(
-			(pair: {
-				business: { map_id: string; title: string; link: string; address: string; phone: string };
-			}) => ({
-				user_id: user.id,
-				title: pair.business.title,
-				link: pair.business.link,
-				address: pair.business.address,
-				phone: pair.business.phone,
-				map_id: pair.business.map_id,
-				raw: JSON.stringify(pair.business)
-			})
-		)
-	});
+	console.log(body);
 
-	// for businesses
-	for (const pair of uniquePairs) {
-		const business = await prisma.businesses.findFirst({
-			where: {
-				user: {
-					id: user.id
-				},
-				map_id: pair.business.map_id
-			}
-		});
-		if (!business) continue;
-		if (!pair.employees) continue;
-		if (pair.employees.length === 0) continue;
-		await prisma.employees.createMany({
-			data: pair.employees.map(
-				(employee: { name: string; roles: string[]; emails: string[]; linkedin_url: string }) => ({
-					user_id: user.id,
-					business_id: business.id,
-					name: employee.name,
-					roles: employee.roles,
-					emails: employee.emails,
-					linkedin_url: employee.linkedin_url,
-					raw: JSON.stringify(pair.employees)
-				})
-			)
-		});
-	}
-
-	return json({
-		success: true
-	});
+	return json({ success: true });
 };
