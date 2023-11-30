@@ -4,13 +4,13 @@
 	let isSidebarOpen = false;
 
 	const DataMenuItems = [
-		{ text: 'Contacts', href: 'contacts', icon: 'people' },
+		// { text: 'Contacts', href: 'contacts', icon: 'people' },
 		{ text: 'Businesses', href: 'businesses', icon: 'building' }
 	];
 
 	const EmailMenuItems = [
 		{ text: 'Email Accounts', href: 'email-accounts', icon: 'at' },
-		{ text: 'Email Inbox', href: 'email-inbox', icon: 'inbox' },
+		// { text: 'Email Inbox', href: 'email-inbox', icon: 'inbox' },
 		{ text: 'Email Templates', href: 'email-templates', icon: 'pencil-square' },
 		{ text: 'Email Playground', href: 'email-playground', icon: 'rocket-takeoff' },
 		{ text: 'Generate Emails', href: 'generate-emails', icon: 'envelope-plus' },
