@@ -15,7 +15,7 @@
 	on:click={onClick}
 	class="group flex flex-col overflow-hidden rounded-md border border-gray-200 bg-white p-4 text-left"
 >
-	<p class="overflow-hidden overflow-ellipsis pr-4 text-lg font-semibold">
+	<p class="display overflow-hidden overflow-ellipsis pr-4 text-lg font-semibold">
 		{email.subject}
 	</p>
 	<p class="whitespace-nowrap text-sm text-gray-400">

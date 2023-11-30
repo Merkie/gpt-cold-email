@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default styles */
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Font control */
 .display {
 	font-family: FixelDisplay, sans-serif;
 }
@@ -10,7 +17,11 @@
 	font-family: FixelText, sans-serif;
 }
 
-button:disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
+/* Extra styles */
+.btn {
+	@apply rounded-md bg-gray-800 p-4 font-bold text-gray-50;
+}
+
+.btn-wide {
+	@apply rounded-md bg-gray-800 p-3 px-8 text-gray-50;
 }

@@ -83,7 +83,7 @@
 			data.businessesWithoutGeneratedEmails.length === 0 ||
 			data.templates.length === 0}
 		on:click={handleGenerateEmails}
-		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
+		class="btn-wide"
 		>{loading
 			? 'Generating Emails...'
 			: data.businessesWithoutGeneratedEmails.length > 0

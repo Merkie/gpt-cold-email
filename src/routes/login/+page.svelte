@@ -47,9 +47,7 @@
 		type="password"
 	/>
 
-	<button on:click={handleLogin} class="rounded-md bg-gray-800 p-4 font-bold text-gray-50"
-		>SUBMIT</button
-	>
+	<button on:click={handleLogin} class="btn">SUBMIT</button>
 
 	<a class="mt-8 text-sm text-gray-500 underline" href="/register">Don't have an account yet?</a>
 </div>

@@ -14,10 +14,7 @@
 	<p class="display text-xl">
 		{data.templates.length} Email Template{data.templates.length === 1 ? '' : 's'}
 	</p>
-	<button
-		on:click={() => (createEmailTemplateModalOpen = true)}
-		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
-	>
+	<button on:click={() => (createEmailTemplateModalOpen = true)} class="btn-wide">
 		Create Email Template
 	</button>
 </div>
@@ -31,10 +28,9 @@
 		{#each data.templates as template}
 			<div class="group flex h-[500px] flex-col rounded-md border border-gray-200 bg-white p-4">
 				<div class="mb-4 flex items-center">
-					<p class="display flex-1 overflow-hidden text-ellipsis text-xl">{template.name}</p>
-					<!-- <button class="mx-2 hidden px-2 group-hover:block">
-						<i class="bi bi-pencil"></i>
-					</button> -->
+					<p class="display flex-1 overflow-hidden text-ellipsis text-xl font-semibold">
+						{template.name}
+					</p>
 					<button
 						on:click={() => {
 							deleteEmailTemplate = template;

@@ -26,7 +26,5 @@
 		</p>
 		<p>{email.body}</p>
 	</div>
-	<button on:click={close} class="mt-8 rounded-md bg-gray-800 p-4 font-bold text-gray-50">
-		Close
-	</button>
+	<button on:click={close} class="btn mt-8"> Close </button>
 </ModalBase>

@@ -59,11 +59,7 @@
 		bind:value={body}
 		class="mb-4 resize-y rounded-md border border-gray-200 bg-white p-2 px-4"
 	/>
-	<button
-		disabled={loading}
-		on:click={handleTemplateCreation}
-		class="mt-8 rounded-md bg-gray-800 p-4 font-bold text-gray-50"
-	>
+	<button disabled={loading} on:click={handleTemplateCreation} class="btn mt-8">
 		{loading ? 'Loading...' : 'Submit'}
 	</button>
 </ModalBase>

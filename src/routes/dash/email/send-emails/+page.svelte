@@ -73,7 +73,7 @@
 	<button
 		disabled={loading || sendableEmails.length === 0 || data.email_accounts.length === 0}
 		on:click={handleSendEmails}
-		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
+		class="btn-wide"
 		>{loading
 			? 'Sending Emails...'
 			: sendableEmails.length > 0

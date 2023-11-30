@@ -18,7 +18,7 @@
 <div
 	transition:fly={{ y: 50, duration: 200 }}
 	style={`max-width: ${width}px;`}
-	class="fixed left-1/2 top-1/2 z-30 flex max-h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto rounded-lg bg-gray-50 p-8 py-12 shadow-md"
+	class="fixed left-1/2 top-1/2 z-30 flex max-h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto rounded-lg border border-gray-200 bg-white p-8 shadow-lg"
 >
 	<div class="mb-8 flex items-center justify-between">
 		<p class="display text-xl font-semibold">{title}</p>

@@ -14,9 +14,8 @@
 	<p class="display text-xl">
 		{data.businesses.length} Businesses
 	</p>
-	<button
-		on:click={() => (uploadBusinessesJsonModalOpen = true)}
-		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50">Upload Business JSON</button
+	<button on:click={() => (uploadBusinessesJsonModalOpen = true)} class="btn-wide"
+		>Upload Business JSON</button
 	>
 </div>
 

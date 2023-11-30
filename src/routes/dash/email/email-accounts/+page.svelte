@@ -17,10 +17,7 @@
 	<p class="display text-xl">
 		{data.accounts.length} Email Account{data.accounts.length === 1 ? '' : 's'}
 	</p>
-	<button
-		on:click={() => (newEmailAccountModalOpen = true)}
-		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
-	>
+	<button on:click={() => (newEmailAccountModalOpen = true)} class="btn-wide">
 		Add Email Account
 	</button>
 </div>

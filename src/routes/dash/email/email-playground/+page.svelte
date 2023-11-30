@@ -102,7 +102,7 @@
 		<button
 			disabled={loading || data.businesses.length === 0 || data.templates.length === 0}
 			on:click={functionHandleGenerate}
-			class="w-full rounded-md bg-gray-800 p-4 font-bold text-gray-50"
+			class="btn w-full"
 		>
 			{loading ? 'Loading...' : 'Generate Email'}
 		</button>

@@ -62,9 +62,7 @@
 		type="password"
 	/>
 
-	<button on:click={handleRegister} class="rounded-md bg-gray-800 p-4 font-bold text-gray-50"
-		>SUBMIT</button
-	>
+	<button on:click={handleRegister} class="btn">SUBMIT</button>
 
 	<a class="mt-8 text-sm text-gray-500 underline" href="/login">Already have an account?</a>
 </div>
