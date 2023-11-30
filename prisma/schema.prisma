@@ -22,19 +22,21 @@ model users {
 }
 
 model businesses {
-  id          Int         @id @default(autoincrement())
-  user        users       @relation(fields: [user_id], references: [id])
-  user_id     Int
-  name        String
-  address     String
-  description String
-  links       String[]
-  emails      String[]
-  phones      String[]
-  metadata    Json?
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @updatedAt
-  employees   employees[]
+  id                       Int         @id @default(autoincrement())
+  user                     users       @relation(fields: [user_id], references: [id])
+  user_id                  Int
+  name                     String
+  address                  String
+  summary                  String
+  links                    String[]
+  emails                   String[]
+  phones                   String[]
+  metadata                 Json?
+  email_formats            String[]
+  most_likely_email_format String?
+  created_at               DateTime    @default(now())
+  updated_at               DateTime    @updatedAt
+  employees                employees[]
 }
 
 model employees {
@@ -47,7 +49,7 @@ model employees {
   roles            String[]
   emails           String[]
   links            String[]
-  metadata         Json?
+  phones           String[]
   created_at       DateTime           @default(now())
   updated_at       DateTime           @updatedAt
   generated_emails generated_emails[]
