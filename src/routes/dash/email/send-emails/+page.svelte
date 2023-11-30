@@ -8,11 +8,23 @@
 	export let data;
 
 	let loading = false;
+	let args = '';
 
 	let selectedAccountIndex = 0;
 
 	let viewingEmailModalOpen = false;
 	let viewingEmail: (generated_emails & { employee: employees }) | undefined = undefined;
+
+	$: sendableEmails = (() => {
+		let emailList = data.emails;
+
+		if (args.includes('limit:')) {
+			const limit = parseInt(args.split('limit:')[1].split(' ')[0]);
+			emailList = emailList.slice(0, limit);
+		}
+
+		return emailList;
+	})();
 
 	async function sendEmail(id: number) {
 		const response = await fetch('/api/v1/email/account/send', {
@@ -49,7 +61,7 @@
 
 		const limit = pLimit(5);
 
-		await Promise.all(data.emails.map((email) => limit(() => sendEmail(email.id))));
+		await Promise.all(sendableEmails.map((email) => limit(() => sendEmail(email.id))));
 
 		loading = false;
 	}
@@ -58,13 +70,13 @@
 <div class="mb-8 flex items-center gap-8 border-b p-4 pb-8">
 	<p class="display text-xl">Send Emails</p>
 	<button
-		disabled={loading || data.emails.length === 0 || data.email_accounts.length === 0}
+		disabled={loading || sendableEmails.length === 0 || data.email_accounts.length === 0}
 		on:click={handleSendEmails}
 		class="rounded-md bg-gray-800 p-3 px-8 text-gray-50"
 		>{loading
 			? 'Sending Emails...'
-			: data.emails.length > 0
-			  ? `Send Emails (${data.emails.length})`
+			: sendableEmails.length > 0
+			  ? `Send Emails (${sendableEmails.length})`
 			  : `All Emails Sent`}</button
 	>
 	<p>Email Account:</p>
@@ -76,6 +88,12 @@
 			<option value={index}>{template.email}</option>
 		{/each}
 	</select>
+	<div class="flex-1"></div>
+	<input
+		bind:value={args}
+		class="w-[300px] rounded-md border border-gray-200 bg-white p-3 px-4"
+		type="text"
+	/>
 </div>
 
 {#if data.emails.length === 0}
