@@ -17,46 +17,32 @@
 	>
 </div>
 
-<div class="rounded-md bg-gray-50 shadow-md">
-	<p class="display border-b p-4 text-xl font-bold">Businesses</p>
-	<div class="p-4">
-		<table class="w-full border">
-			<thead class="bg-gray-50">
-				<tr>
-					<th class="display border p-2 text-left">Business Name</th>
-					<th class="display border p-2 text-left">Address</th>
-					<th class="display border p-2 text-center">Contacts</th>
-					<th class="display border p-2 text-center">Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each businesses as business, i}
-					<tr class={i % 2 !== 0 ? '' : 'bg-gray-100'}>
-						<td class="border p-2">{business.name}</td>
-						<td class="border p-2">{business.address}</td>
-						<td class="border p-2">
-							{#if business.employeeCount > 0}
-								<p class="text-center">
-									<i class="bi bi-check-lg text-emerald-500"></i>
-								</p>
-							{:else}
-								<p class="text-center">
-									<i class="bi bi-x-lg text-red-500"></i>
-								</p>
-							{/if}
-						</td>
-						<td class="border p-2">
-							<p
-								class={`mx-auto w-fit rounded-md bg-yellow-400 p-1 px-3 text-xs font-bold text-gray-50`}
-							>
-								No Draft
-							</p>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
+<div class="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+	{#each businesses as business}
+		<div
+			class="group flex flex-col overflow-hidden rounded-md border border-gray-200 bg-white p-4 text-left shadow-md"
+		>
+			<div class="mb-2">
+				<h3 class="text-lg font-semibold">{business.name}</h3>
+				<p class="text-sm text-gray-500">{business.address}</p>
+			</div>
+			<div class="flex justify-between">
+				<div class="flex items-center">
+					<span
+						class={`bi ${
+							business.employeeCount > 0 ? 'bi-check-lg text-emerald-500' : 'bi-x-lg text-red-500'
+						}`}
+					></span>
+					<span class="ml-2 text-sm"
+						>{business.employeeCount > 0 ? 'Contacts Available' : 'No Contacts'}</span
+					>
+				</div>
+				<div class="mx-auto w-fit rounded-md bg-yellow-400 p-1 px-3 text-xs font-bold text-gray-50">
+					No Draft
+				</div>
+			</div>
+		</div>
+	{/each}
 </div>
 
 {#if uploadBusinessesJsonModalOpen}
