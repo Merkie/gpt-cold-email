@@ -7,20 +7,29 @@ export const load = async ({ locals: { user, prisma } }) => {
 		},
 		include: {
 			employees: {
-				select: {
-					id: true
+				include: {
+					generated_emails: {
+						select: {
+							id: true,
+							sent: true
+						}
+					}
 				}
 			}
 		}
 	});
 
-	const businessesWithEmployeeCount = businesses.map((business) => ({
+	const businessesWithFlags = businesses.map((business) => ({
 		...business,
-		employees: undefined,
-		employeeCount: business.employees.length
+		employeeCount: business.employees.length,
+		status: business.employees.find((e) => e.generated_emails.length > 0)
+			? business.employees.find((e) => e.generated_emails.find((e) => e.sent))
+				? 'EMAIL SENT'
+				: 'DRAFT READY'
+			: 'NO DRAFTS'
 	}));
 
 	return {
-		businesses: businessesWithEmployeeCount
+		businesses: businessesWithFlags
 	};
 };
