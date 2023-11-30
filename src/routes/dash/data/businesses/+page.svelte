@@ -35,7 +35,7 @@
 				<p class="text-sm text-gray-500">{business.address}</p>
 			</div>
 			<div class="flex-1"></div>
-			<div class="flex justify-between">
+			<div class="flex w-full justify-between">
 				<div class="flex items-center">
 					<span
 						class={`bi ${
